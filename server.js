@@ -32,7 +32,7 @@ app.get("/parts", auth, (req, res)=>  {
     console.log("user got to parts section")
 
     const connection = mysql.createConnection(config)
-    connection.query(querystr, (err, rows, fields) => {
+    connection.query(querystr, (err, rows) => {
         if (err) {
             throw err
         }
@@ -51,7 +51,7 @@ app.post("/login", (req, res) => {
     hash.update(passAttempt)
     const querystr = 'SELECT * FROM Users WHERE email = ? AND pass = ?'
     const connection = mysql.createConnection(config)
-    connection.query(querystr, [userAttempt, hash.digest('hex')],(err, rows, fields) => {
+    connection.query(querystr, [userAttempt, hash.digest('hex')],(err, rows) => {
         if (err) {
             console.error(err)
             res.sendStatus(500)
