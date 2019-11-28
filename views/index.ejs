@@ -19,8 +19,9 @@
       <button id="authButton" type="submit">Log in</button>
     </div>
 </form>
-
-
-
+<% if (data.message) { %>
+  <p><%= data.message %></p>
+<% } %>
+ 
 </body>
 </html>

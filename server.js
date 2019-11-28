@@ -7,7 +7,8 @@ const crypto = require('crypto');
 const bodyParse = require('body-parser');
 
 
-
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
 app.use('/', express.static('public'));
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
@@ -16,7 +17,7 @@ app.listen(PORT, () => {
 
 
 const auth = (req, res, next) => {
-    if (session.test == 'test') {
+    if (session.auth) {
         next()
     }
     else {
@@ -59,12 +60,12 @@ app.post("/login", (req, res) => {
         else if (rows[0] != undefined) {
             let currentDate = new Date()
             console.log('User ' + userAttempt + ' authenticated on ' + currentDate)
-            session.test = 'test'
+            session.auth = true
             res.redirect('/login')
         }
         else {
             console.log("failed auth attempt")
-            res.sendStatus(401) 
+            res.render('index', {data: {message: 'invalid login'}})
         }
         res.end()
     })
@@ -72,10 +73,12 @@ app.post("/login", (req, res) => {
 
 
 app.get("/login", auth, (req, res) => {
-    res.sendFile(__dirname + '/views/login.html')
+    res.render('login')
 })
 
-
+app.get("/" ,(req, res) => {
+    res.render('index', {data: {}})
+})
 
 module.exports = {
     app: app
