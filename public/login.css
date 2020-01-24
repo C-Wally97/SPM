@@ -1,0 +1,26 @@
+* {
+    font-family: 'Open Sans', sans-serif, FontAwesome;
+    transition: 2s ease;
+}
+
+body {
+    background-color: #D5D6D2;
+}
+
+#parts_table {
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+}
+
+table.highlight>tbody>tr:hover {
+    background-color: black;    
+}
+
+#parts_table tr:first-child:hover {
+    background-color: inherit;
+}
+
+#nav_main {
+    background-color: #324851;
+}

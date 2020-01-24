@@ -1,18 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="test.js"></script>
+  <script src="db.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="login.css">
   <title>Document</title>
 </head>
 
   <body>
-      <table id="partsTable">
+    <nav id="nav_main">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo left">SPM</a>
+        <ul class="right hide-on-med-and-down">
+          <li class="active"><a href="">Descriptions</a></li>
+          <li><a href="">parts</a></li>
+          <li><a href="">Series</a></li>
+        </ul>
+      </div>
+    </nav>
+      <table id="parts_table" class="highlight">
+        <tbody>
           <tr><th>id</th><th>xQM_No</th><th>Warranty_No</th><th>Serial_No</th><th>Date of Sale</th><th>Date of Failure</th><th>Part No</th><th>Comments</th><th>Sent_to_manufacture</th><th>Date Added</th></tr>
+        </tbody>
         </table>
   </body>
 </html>
 
+
+
+ <!-- Compiled and minified JavaScript -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

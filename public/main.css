@@ -1,0 +1,44 @@
+* {
+    font-family: 'Open Sans', sans-serif, FontAwesome;
+    transition: 2s ease;
+}
+
+body {
+    background-color: #D5D6D2;
+}
+
+#auth_container {
+    color: white;
+    border-top: 5px solid #FF8D3F;
+    background-color: #324851;
+    display: block;
+    width: 30%;
+    margin: 10% auto;
+    text-align: center;
+}
+
+#auth_container input {
+    color: white;
+}
+
+#user_container {
+    display:block;
+    width: 50%;
+    margin: 3em auto;
+}
+
+#pass_container {
+    display:block;
+    width: 50%;
+    margin: 3em auto;
+}
+
+#authButton {
+    margin-bottom: 2em;
+}
+
+/* 
+    #D5D6D2 - off white
+    #324851 - dark blue
+    #FF8D3F - orange
+*/
