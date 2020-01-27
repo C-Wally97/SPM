@@ -14,7 +14,8 @@ body {
 }
 
 table.highlight>tbody>tr:hover {
-    background-color: black;    
+    background-color: white;    
+    cursor: pointer;
 }
 
 #parts_table tr:first-child:hover {

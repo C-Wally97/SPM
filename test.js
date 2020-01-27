@@ -1,14 +1,24 @@
-// const assert = require('assert')
-// const server = require('./server')
-// const chai = require('chai')
-// const chaiHttp = require('chai-http')
+const assert = require('assert')
+const server = require('./server')
+const chai = require('chai')
+const chaiHttp = require('chai-http')
+const mocha = require('mocha')
+const should = chai.should();
+chai.use(chaiHttp)
 
-// chai.use(chaiHttp)
-// chai.should();
+after(()=> {
+    server.close();
+});
 
+describe('Server', function() {
+    it('should return status of 200 when loaded', (done) => {
+        chai
+        .request(server)
+        .get("/")
+        .end((err, res) => {
+            res.should.have.status(200);
+            done();
+          });
+    })
 
-// // you are stuck on this part. trying to get chai tests up and running.
-// // website I am following: https://medium.com/@asciidev/testing-a-node-express-application-with-mocha-chai-9592d41c0083
-// describe('test', () =>{
-
-// }); 
+})

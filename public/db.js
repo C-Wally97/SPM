@@ -10,6 +10,7 @@ fetch('./parts')
 
       // Examine the text in the response
       response.json().then(function(data) {
+        console.log(data);
         let tableID = document.querySelector("#parts_table > tbody");
         for (let i = 0; i < data.length; i++) {
             const tr = document.createElement("tr")
