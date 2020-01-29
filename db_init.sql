@@ -37,7 +37,8 @@ create table Descriptions (
   foreign key (Series_No) references Series(Series)
 );
 
-INSERT INTO Descriptions VALUES(1,404211, 1000, "AK 30", "Chips on outer casing", "Battery does not charge", "CW", FALSE, "2018-07-18", "Documents/Japan/IMG_0416.jpeg","Premature wear");
+INSERT INTO Descriptions VALUES(1,404211, 1000, "AK 30", "Chips on outer casing", "Battery does not charge", "CW", FALSE, "2018-07-18", "img/IMG_0420.jpeg","Premature wear");
+INSERT INTO Descriptions VALUES(2,404211, 1000, "AK 30", "Chips on outer casing", "Battery does not charge", "CW", FALSE, "2018-07-18", "","Premature wear");
 
 create table Parts (
   id int(10) auto_increment primary key,

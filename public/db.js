@@ -1,5 +1,5 @@
 window.onload = function() {
-fetch('./parts')
+fetch('./getParts')
   .then(
     function(response) {
       if (response.status !== 200) {
@@ -10,7 +10,6 @@ fetch('./parts')
 
       // Examine the text in the response
       response.json().then(function(data) {
-        console.log(data);
         let tableID = document.querySelector("#parts_table > tbody");
         for (let i = 0; i < data.length; i++) {
             const tr = document.createElement("tr")

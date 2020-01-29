@@ -35,6 +35,21 @@ async function select(queryStr,queryVars){ //Runs MySQL Select Queries and retur
     }
   }
 
+  async function insert(queryStr,queryVars){ 
+    try {
+    const sqlConnection = await mysqlConnection(); 
+    const newQuery = sqlConnection.format(queryStr,queryVars); 
+    await sqlConnection.query(newQuery) 
+    return true; 
+    }
+    catch (error){
+      console.log("Failure: ", error); 
+      return null; 
+    }
+  }
+  
+
+
 async function getParts() {
     const query = await select('SELECT * FROM Parts')
     if (query != '[]') {
@@ -46,18 +61,33 @@ async function getParts() {
     }
 }
 
+async function getDesc() {
+        let query = await select('SELECT * FROM Descriptions')
+        return query
+}
+
+async function addDesc(descData) {
+    let query = await insert('INSERT INTO Descriptions (xQM_No,series_No,Models,Symptoms,Description_of_failure,Technician,Closed,Date_raised,image_location,Fault_type) VALUES (?,?,?,?,?,?,?,?,?,?)',
+    [descData.xQM_No,descData.series_No,descData.models,descData.symptoms,descData.failure_Desc,descData.technician,descData.closed,descData.date_Raised,descData.img_Loc,descData.Fault_type])
+    return query
+}
+
 async function getUser(userName, userPass) {
     const query = await select('SELECT * FROM Users WHERE email = ? AND pass = ?', [userName, userPass])
     if (!query.length) {
-        return Error('test')
+        return Error('invalid login')
     }
     else {
         return query
     }
 }
 
+
+
 module.exports = {
     mysqlConnection: mysqlConnection,
     getParts: getParts,
-    getUser: getUser
+    getUser: getUser,
+    getDesc: getDesc,
+    addDesc: addDesc
 }

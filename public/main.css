@@ -1,44 +1,48 @@
 * {
     font-family: 'Open Sans', sans-serif, FontAwesome;
-    transition: 2s ease;
+    transition: 1s ease;
 }
 
 body {
     background-color: #D5D6D2;
 }
 
-#auth_container {
-    color: white;
-    border-top: 5px solid #FF8D3F;
-    background-color: #324851;
-    display: block;
-    width: 30%;
-    margin: 10% auto;
+#parts_table {
     text-align: center;
+    width: 70%;
+    margin: 0 auto;
 }
 
-#auth_container input {
-    color: white;
+#desc_table {
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
 }
 
-#user_container {
-    display:block;
-    width: 50%;
-    margin: 3em auto;
+table.highlight>tbody>tr:hover {
+    background-color: white;    
+    cursor: pointer;
 }
 
-#pass_container {
-    display:block;
-    width: 50%;
-    margin: 3em auto;
+#parts_table tr:first-child:hover {
+    background-color: inherit;
 }
 
-#authButton {
-    margin-bottom: 2em;
+#desc_table tr:first-child:hover {
+    background-color: inherit;
 }
 
-/* 
-    #D5D6D2 - off white
-    #324851 - dark blue
-    #FF8D3F - orange
-*/
+#nav_main {
+    background-color: #324851;
+}
+
+
+.addDesc_Wrapper {
+    display: none;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.show {
+    display: block;
+}

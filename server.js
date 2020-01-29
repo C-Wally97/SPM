@@ -20,15 +20,50 @@ module.exports = server;
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({ extended: false }))
 
-app.get("/parts", getParts)
-app.post("/login", login)
-app.get("/login", renderLogin)
+app.post("/descriptions", login)
+app.get("/descriptions", renderDesc)
 app.get("/", renderIndex)
+app.get("/getParts", getParts)
+app.get("/parts", renderParts)
+app.get("/getDesc", getDesc)
+app.post("/addDesc", addDesc)
 
 
 async function getParts(req, res) {
-    let response = await sqlDb.getParts()
-    res.json(response)
+    console.log(req.body)
+    if (session.auth) {
+        let response = await sqlDb.getParts()
+        res.json(response)
+    }
+    else {
+        res.redirect('/')
+    }
+}
+
+async function getDesc(req, res) {
+    if (session.auth) {
+        let response = await sqlDb.getDesc()
+        res.json(response)
+    }
+    else {
+        res.redirect('/')
+    }
+}
+
+async function addDesc(req, res) {
+    if(req.body.closed == undefined) {
+        req.body.closed = false
+    }
+    else {
+        req.body.closed = true
+    }
+    if (session.auth) {
+        let response = await sqlDb.addDesc(req.body)
+        res.json(response)
+    }
+    else {
+         res.redirect('/')
+    }
 }
 
 async function login(req, res) {
@@ -41,7 +76,7 @@ async function login(req, res) {
         let currentDate = new Date()
         console.log('User ' + attempt[0].email + ' authenticated on ' + currentDate)
         session.auth = true
-        res.redirect('/login')
+        res.redirect('/descriptions')
     }
     else {
         console.log("failed auth attempt")
@@ -50,10 +85,18 @@ async function login(req, res) {
 
 }
 
+async function renderParts(req, res) {
+    if (session.auth) {
+        res.render('parts')
+    }
+    else {
+        res.redirect('/')
+    }
+}
 
-async function renderLogin(req, res) {
+async function renderDesc(req, res) {
         if (session.auth) {
-            res.render('login')
+            res.render('descriptions')
         }
         else {
             res.redirect('/')
