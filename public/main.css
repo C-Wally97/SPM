@@ -36,12 +36,13 @@ table.highlight>tbody>tr:hover {
     background-color: #324851;
 }
 
-
-.addDesc_Wrapper {
-    display: none;
-    width: 40%;
+#addDesc_Wrapper {
+    display: block;
     margin: 0 auto;
+    width: 90%;
+    padding-bottom: 2em;
 }
+
 
 .show {
     display: block;

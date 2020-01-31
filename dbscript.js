@@ -66,6 +66,11 @@ async function getDesc() {
         return query
 }
 
+async function getSeries() {
+    let query = await select('SELECT * FROM Series')
+    return query
+}
+ 
 async function addDesc(descData) {
     let query = await insert('INSERT INTO Descriptions (xQM_No,series_No,Models,Symptoms,Description_of_failure,Technician,Closed,Date_raised,image_location,Fault_type) VALUES (?,?,?,?,?,?,?,?,?,?)',
     [descData.xQM_No,descData.series_No,descData.models,descData.symptoms,descData.failure_Desc,descData.technician,descData.closed,descData.date_Raised,descData.img_Loc,descData.Fault_type])
@@ -89,5 +94,6 @@ module.exports = {
     getParts: getParts,
     getUser: getUser,
     getDesc: getDesc,
+    getSeries: getSeries,
     addDesc: addDesc
 }

@@ -1,6 +1,7 @@
+
 function displayAdd() {
-    let descBox = document.querySelector('.addDesc_Wrapper');
-    descBox.classList.toggle('show');
+    let modal = document.querySelector('.mymodal');
+    modal.classList.toggle('show');
 }
 
 window.onload = function() {
@@ -52,7 +53,12 @@ window.onload = function() {
         options.format = 'yyyy-mm-dd'
         let instances = M.Datepicker.init(elems,options);
       });
-    
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+      });
+
 
 function testfunc(data) {
     console.log(data.textContent)

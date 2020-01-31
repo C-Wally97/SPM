@@ -19,14 +19,16 @@
       <ul class="right hide-on-med-and-down">
         <li class="active"><a href="">Descriptions</a></li>
         <li><a href="/parts">Parts</a></li>
-        <li><a href="">Series</a></li>
+        <li><a href="/series">Series</a></li>
       </ul>
     </div>
   </nav>
-
-  <button onclick="displayAdd()">Add Description</button>
-
-<div class="addDesc_Wrapper">
+<a class="waves-effect waves-light btn modal-trigger" href="#myModal">Add a Description</a>
+<% if (data.message) { %>
+  <p class="red-text"><%= data.message %></p>
+<% } %>
+<div id="myModal" class="modal">
+<div id="addDesc_Wrapper">
   <form class="col s12" action="/addDesc" method="POST">
     <p>Add a Description</p>
     <div class="row">
@@ -85,10 +87,9 @@
     <button class="waves-effect waves-light btn" id="descButton" type="submit">Add Description</button>
   </form>
 </div>
-
-
+</div>
   <table id="desc_table" class="highlight" class="container">
-    <tbody id="test">
+    <tbody>
       <tr><th>id</th><th>xQM_No</th><th>Series_No</th><th>Models</th><th>Symptoms</th><th>Description of Failure</th><th>Technician</th><th>Closed</th><th>Date Raised</th><th>Img Location</th><th>Fault Type</th><th></th></tr>
     </tbody>
     </table>

@@ -24,13 +24,13 @@ app.post("/descriptions", login)
 app.get("/descriptions", renderDesc)
 app.get("/", renderIndex)
 app.get("/getParts", getParts)
+app.get("/getSeries", getSeries)
+app.get("/series", renderSeries)
 app.get("/parts", renderParts)
 app.get("/getDesc", getDesc)
 app.post("/addDesc", addDesc)
 
-
 async function getParts(req, res) {
-    console.log(req.body)
     if (session.auth) {
         let response = await sqlDb.getParts()
         res.json(response)
@@ -50,6 +50,16 @@ async function getDesc(req, res) {
     }
 }
 
+async function getSeries(req, res) {
+    if (session.auth) {
+        let response = await sqlDb.getSeries()
+        res.json(response)
+    }
+    else {
+        res.redirect('/')
+    }
+}
+
 async function addDesc(req, res) {
     if(req.body.closed == undefined) {
         req.body.closed = false
@@ -59,7 +69,13 @@ async function addDesc(req, res) {
     }
     if (session.auth) {
         let response = await sqlDb.addDesc(req.body)
-        res.json(response)
+        if(response != null) {
+            res.redirect('/descriptions')
+        }     
+        else {
+            res.render('descriptions', {data: {message: 'Adding failed'}})
+        }
+        
     }
     else {
          res.redirect('/')
@@ -94,9 +110,18 @@ async function renderParts(req, res) {
     }
 }
 
+async function renderSeries(req, res) {
+    if (session.auth) {
+        res.render('series', {data: {}})
+    }
+    else {
+        res.redirect('/')
+    }
+}
+
 async function renderDesc(req, res) {
         if (session.auth) {
-            res.render('descriptions')
+            res.render('descriptions', {data: {}})
         }
         else {
             res.redirect('/')

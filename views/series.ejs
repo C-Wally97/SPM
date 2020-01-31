@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="series.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="main.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Document</title>
+</head>
+<body>
+  <nav id="nav_main">
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo left">SPM</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/descriptions">Descriptions</a></li>
+        <li><a href="/parts">Parts</a></li>
+        <li class="active"><a href="">Series</a></li>
+      </ul>
+    </div>
+  </nav>
+<% if (data.message) { %>
+  <p class="red-text"><%= data.message %></p>
+<% } %>
+  <table id="series_table" class="highlight" class="container">
+    <tbody>
+      <tr><th>Series No</th><th>Description</th><th>Product Group</th><th>Power Type</th></tr>
+    </tbody>
+    </table>
+</body>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</html>
