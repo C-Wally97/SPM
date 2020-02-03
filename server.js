@@ -29,6 +29,7 @@ app.get("/series", renderSeries)
 app.get("/parts", renderParts)
 app.get("/getDesc", getDesc)
 app.post("/addDesc", addDesc)
+app.post("/addPArt", addPart)
 
 async function getParts(req, res) {
     if (session.auth) {
@@ -82,6 +83,29 @@ async function addDesc(req, res) {
     }
 }
 
+async function addPart(req, res) {
+
+    if(req.body.sent_to_manufacture == 0) {
+        req.body.sent_to_manufacture = false
+    }
+    else {
+        req.body.sent_to_manufacture = true
+    }
+    if (session.auth) {
+        let response = await sqlDb.addPart(req.body)
+        if(response != null) {
+            res.redirect('/parts')
+        }     
+        else {
+            res.render('parts', {data: {message: 'Adding failed'}})
+        }
+        
+    }
+    else {
+         res.redirect('/')
+    }
+}
+
 async function login(req, res) {
     const hash = crypto.createHash('md5')
     let userAttempt = req.body.email
@@ -103,7 +127,7 @@ async function login(req, res) {
 
 async function renderParts(req, res) {
     if (session.auth) {
-        res.render('parts')
+        res.render('parts', {data: {}})
     }
     else {
         res.redirect('/')

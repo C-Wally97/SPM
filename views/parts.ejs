@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="db.js"></script>
+    <script src="parts.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="main.css">
-    <title>Document</title>
+    <title>Parts</title>
 </head>
 
   <body>
@@ -18,15 +18,56 @@
         <ul class="right hide-on-med-and-down">
           <li><a href="/descriptions">Descriptions</a></li>
           <li  class="active"><a href="">Parts</a></li>
-          <li><a href="">Series</a></li>
+          <li><a href="/series">Series</a></li>
         </ul>
       </div>
     </nav>
     <a class="waves-effect waves-light btn modal-trigger" href="#myModal">Add a Part</a>
-    <div id="myModal">
-        <form class="col s12" action="/addDesc" method="POST">
-            
+    <div id="myModal" id="addDesc_Wrapper" class="modal">
+        <div id="addDesc_Wrapper">
+        <form class="col s12" action="/addPart" method="POST">
+            <div class="row">
+                <label for="xQM_No">xQM No</label>
+                <input name="xQM_No" id="xQM_No" type="number" class="validate">
+              </div>
+              <div class="row">
+                <label for="Warranty_No">Warranty No</label>
+                <input name="warranty_No" id="Warranty_No" type="text">
+              </div>
+              <div class="row">
+                <label for="Serial_No">Serial Number</label>
+                <input name="serial_No" id="Serial_No" type="number" class="validate">
+              </div>
+              <div class="row">
+                <label for="date_of_sale">Date of Sale</label>
+                <input name="date_of_sale" id="date_of_sale" type="text" class="datepicker">
+              </div>
+              <div class="row">
+                <label for="date_of_failure">Date of Failure</label>
+                <input name="date_of_failure" id="date_of_failure" type="text" class="datepicker">
+              </div>
+              <div class="row">
+                <label for="Part_No">xQM No</label>
+                <input name="part_No" id="Part_No" type="number" class="validate">
+              </div>
+              <div class="row">
+                <label for="Comments">xQM No</label>
+                <input name="comments" id="Comments" type="text">
+              </div>
+              <div class="row">
+                <label for="Sent_to_Manufacture"></label>
+                <select name="sent_to_manufacture" class="select" id="Sent_to_Manufacture">
+                    <option value="0">False</option>
+                    <option value="1">True</option>
+                </select>
+             </div>
+             <div class="row">
+                <label for="date_raised">Date Raised</label>
+                <input name="date_raised" id="date_raised" type="text" class="datepicker">
+              </div>
+              <button class="waves-effect waves-light btn" type="submit">Add Part</button>
         </form>
+    </div>
     </div>
       <table id="parts_table">
         <tbody>

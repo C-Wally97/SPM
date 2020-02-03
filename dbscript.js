@@ -73,9 +73,17 @@ async function getSeries() {
  
 async function addDesc(descData) {
     let query = await insert('INSERT INTO Descriptions (xQM_No,series_No,Models,Symptoms,Description_of_failure,Technician,Closed,Date_raised,image_location,Fault_type) VALUES (?,?,?,?,?,?,?,?,?,?)',
-    [descData.xQM_No,descData.series_No,descData.models,descData.symptoms,descData.failure_Desc,descData.technician,descData.closed,descData.date_Raised,descData.img_Loc,descData.Fault_type])
+    [descData.xQM_No,descData.series_No,descData.models,descData.symptoms,descData.failure_Desc,descData.technician,descData.closed,descData.date_Raised,descData.img_Loc,descData.fault_Type])
     return query
 }
+
+async function addPart(partData) {
+    let query = await insert('INSERT INTO Parts (xQM_No, Warranty_No, Serial_No, Date_of_sale, Date_of_failure, Part_number, Comments, Sent_to_manufacture, Date_added) VALUES (?,?,?,?,?,?,?,?,?)',
+    [partData.xQM_No, partData.warranty_No, partData.serial_No, partData.date_of_sale, partData.date_of_failure, partData.part_No, partData.comments, partData.sent_to_manufacture, partData.date_raised])
+    return query
+}
+
+
 
 async function getUser(userName, userPass) {
     const query = await select('SELECT * FROM Users WHERE email = ? AND pass = ?', [userName, userPass])
@@ -95,5 +103,6 @@ module.exports = {
     getUser: getUser,
     getDesc: getDesc,
     getSeries: getSeries,
-    addDesc: addDesc
+    addDesc: addDesc,
+    addPart: addPart
 }

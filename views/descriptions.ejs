@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="scripts.js"></script>
+  <script src="descriptions.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -31,6 +31,10 @@
 <div id="addDesc_Wrapper">
   <form class="col s12" action="/addDesc" method="POST">
     <p>Add a Description</p>
+    <div class="row">
+      <label for="date_Raised">Date Raised</label>
+      <input name="date_Raised" id="date_Raised" type="text" class="datepicker">
+    </div>
     <div class="row">
       <label for="xQM_No">xQM No</label>
       <input name="xQM_No" id="xQM_No" type="number" class="validate">
@@ -69,10 +73,6 @@
     <div class="row">
       <label for="fault_Type">Fault Type</label>
       <input name="fault_Type" id="fault_Type" type="text" class="validate">
-    </div>
-    <div class="row">
-      <label for="date_Raised">Date Raised</label>
-      <input name="date_Raised" id="date_Raised" type="text" class="datepicker">
     </div>
     <div class="file-field input-field">
       <div class="btn">

@@ -34,3 +34,20 @@ fetch('./getParts')
   });
 
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.modal');
+  var instances = M.Modal.init(elems);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  let elems = document.querySelectorAll('.datepicker');
+  let options = {}
+  options.format = 'yyyy-mm-dd'
+  let instances = M.Datepicker.init(elems,options);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems);
+});

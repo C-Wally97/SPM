@@ -1,9 +1,3 @@
-
-function displayAdd() {
-    let modal = document.querySelector('.mymodal');
-    modal.classList.toggle('show');
-}
-
 window.onload = function() {
     fetch('./getDesc')
     .then(
@@ -60,8 +54,9 @@ window.onload = function() {
       });
 
 
-function testfunc(data) {
-    console.log(data.textContent)
-}
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, options);
+      });
 
 

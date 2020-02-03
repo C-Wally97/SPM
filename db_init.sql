@@ -31,7 +31,7 @@ create table Descriptions (
   Description_of_failure varchar(100),
   Technician varchar(10),
   Closed boolean,
-  Date_raised date,
+  Date_raised varchar(30),
   image_location varchar(200),
   Fault_type varchar(50),
   foreign key (Series_No) references Series(Series)
@@ -50,8 +50,7 @@ create table Parts (
   Part_number varchar(20),
   Comments varchar(150),
   Sent_to_manufacture boolean,
-  Date_added varchar(20),
-  foreign key (xQM_No) references Descriptions(id)
+  Date_added varchar(20)
 );
 
 INSERT INTO Parts VALUES (1, 1, "WR-129916", "5 10 474 526", "2017-04-05", '2018-05-03', "4601 640 0102", "test comment", FALSE, "2000-01-01");
