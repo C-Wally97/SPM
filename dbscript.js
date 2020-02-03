@@ -83,7 +83,11 @@ async function addPart(partData) {
     return query
 }
 
-
+async function editDesc(descData) {
+    let query = await select('UPDATE Descriptions SET xQM_No = ?,series_No = ?,Models = ?,Symptoms = ?,Description_of_failure = ?,Technician = ?,Closed = ?,Date_raised = ?,image_location = ?,Fault_type = ? WHERE id = ?',
+    [descData.xQM_No,descData.series_No,descData.models,descData.symptoms,descData.failure_Desc,descData.technician,descData.closed,descData.date_Raised,descData.img_Loc,descData.fault_Type, descData.id])
+    return query
+}
 
 async function getUser(userName, userPass) {
     const query = await select('SELECT * FROM Users WHERE email = ? AND pass = ?', [userName, userPass])
@@ -104,5 +108,6 @@ module.exports = {
     getDesc: getDesc,
     getSeries: getSeries,
     addDesc: addDesc,
-    addPart: addPart
+    addPart: addPart,
+    editDesc: editDesc
 }

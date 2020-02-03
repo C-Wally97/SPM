@@ -29,7 +29,9 @@ app.get("/series", renderSeries)
 app.get("/parts", renderParts)
 app.get("/getDesc", getDesc)
 app.post("/addDesc", addDesc)
-app.post("/addPArt", addPart)
+app.post("/addPart", addPart)
+// app.post("/editDesc",editDesc)
+app.post("/editDesc/:id",editDesc)
 
 async function getParts(req, res) {
     if (session.auth) {
@@ -62,11 +64,12 @@ async function getSeries(req, res) {
 }
 
 async function addDesc(req, res) {
-    if(req.body.closed == undefined) {
-        req.body.closed = false
+    console.log(req.body.closed)
+    if(req.body.closed == "Open") {
+        req.body.closed = true
     }
     else {
-        req.body.closed = true
+        req.body.closed = false
     }
     if (session.auth) {
         let response = await sqlDb.addDesc(req.body)
@@ -84,7 +87,6 @@ async function addDesc(req, res) {
 }
 
 async function addPart(req, res) {
-
     if(req.body.sent_to_manufacture == 0) {
         req.body.sent_to_manufacture = false
     }
@@ -98,6 +100,30 @@ async function addPart(req, res) {
         }     
         else {
             res.render('parts', {data: {message: 'Adding failed'}})
+        }
+        
+    }
+    else {
+         res.redirect('/')
+    }
+}
+
+async function editDesc(req, res) {
+    req.body.id = req.params.id;
+    if(req.body.closed == "Open") {
+        req.body.closed = true
+    }
+    else {
+        req.body.closed = false
+    }
+    if (session.auth) {
+        let response = await sqlDb.editDesc(req.body)
+        console.log(response); 
+        if(response != null) {
+            res.redirect('/descriptions')
+        }     
+        else {     
+            res.render('descriptions', {data: {message: 'Adding failed'}})
         }
         
     }
