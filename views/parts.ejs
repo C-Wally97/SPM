@@ -22,10 +22,13 @@
         </ul>
       </div>
     </nav>
-    <a class="waves-effect waves-light btn modal-trigger" href="#myModal">Add a Part</a>
-    <div id="myModal" id="addDesc_Wrapper" class="modal">
-        <div id="addDesc_Wrapper">
-        <form class="col s12" action="/addPart" method="POST">
+    <a class="waves-effect waves-light btn modal-trigger" id="addPart" href="#myModal">Add a Part</a>
+    <% if (data.message) { %>
+      <p class="red-text"><%= data.message %></p>
+    <% } %>
+    <div id="myModal" class="modal">
+        <div id="modal_Wrapper">
+        <form id="partForm" class="col s12" action="/addPart" method="POST">
             <div class="row">
                 <label for="xQM_No">xQM No</label>
                 <input name="xQM_No" id="xQM_No" type="number" class="validate">
@@ -36,7 +39,7 @@
               </div>
               <div class="row">
                 <label for="Serial_No">Serial Number</label>
-                <input name="serial_No" id="Serial_No" type="number" class="validate">
+                <input name="serial_No" id="Serial_No" type="text" class="validate">
               </div>
               <div class="row">
                 <label for="date_of_sale">Date of Sale</label>
@@ -47,31 +50,31 @@
                 <input name="date_of_failure" id="date_of_failure" type="text" class="datepicker">
               </div>
               <div class="row">
-                <label for="Part_No">xQM No</label>
-                <input name="part_No" id="Part_No" type="number" class="validate">
+                <label for="Part_No">Part No</label>
+                <input name="part_No" id="Part_No" type="text" class="validate">
               </div>
               <div class="row">
-                <label for="Comments">xQM No</label>
+                <label for="Comments">Comments</label>
                 <input name="comments" id="Comments" type="text">
               </div>
               <div class="row">
-                <label for="Sent_to_Manufacture"></label>
+                <label>Sent to Manufacture</label>
                 <select name="sent_to_manufacture" class="select" id="Sent_to_Manufacture">
-                    <option value="0">False</option>
-                    <option value="1">True</option>
+                    <option value=false>No</option>
+                    <option value=true>Yes</option>
                 </select>
              </div>
              <div class="row">
                 <label for="date_raised">Date Raised</label>
                 <input name="date_raised" id="date_raised" type="text" class="datepicker">
               </div>
-              <button class="waves-effect waves-light btn" type="submit">Add Part</button>
+              <button id="partButton" class="waves-effect waves-light btn" type="submit">Add Part</button>
         </form>
     </div>
     </div>
       <table id="parts_table">
         <tbody>
-          <tr><th>id</th><th>xQM_No</th><th>Warranty_No</th><th>Serial_No</th><th>Date of Sale</th><th>Date of Failure</th><th>Part No</th><th>Comments</th><th>Sent_to_manufacture</th><th>Date Added</th></tr>
+          <tr><th>id</th><th>xQM_No</th><th>Warranty_No</th><th>Serial_No</th><th>Date of Sale</th><th>Date of Failure</th><th>Part No</th><th>Comments</th><th>Sent_to_manufacture</th><th>Date Added</th><th></th></tr>
         </tbody>
         </table>
   </body>

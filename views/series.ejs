@@ -26,11 +26,35 @@
 <% if (data.message) { %>
   <p class="red-text"><%= data.message %></p>
 <% } %>
+<a class="waves-effect waves-light btn modal-trigger" id="addSeries" href="#myModal">Add Series</a>
   <table id="series_table" class="highlight" class="container">
     <tbody>
       <tr><th>Series No</th><th>Description</th><th>Product Group</th><th>Power Type</th></tr>
     </tbody>
     </table>
+    <div id="myModal" id="modal_wrapper" class="modal">
+      <div id="modal_Wrapper">
+        <form id="seriesForm" class="col s12" action="/addSeries" method="POST">
+          <div class="row">
+            <label for="series_No">Series No</label>
+            <input name="series_No" id="series_No" type="text">
+          </div>
+          <div class="row">
+            <label for="description">Description</label>
+            <input name="description" id="description" type="text">
+          </div>
+          <div class="row">
+            <label for="product_Group">Product Group</label>
+            <input name="product_Group" id="product_Group" type="text">
+          </div>
+          <div class="row">
+            <label for="power_Type">Power Type</label>
+            <input name="power_Type" id="power_Type" type="text">
+          </div>
+          <button id="seriesButton" class="waves-effect waves-light btn" type="submit">Add Series</button>
+        </form> 
+      </div>
+    </div>
 </body>
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">

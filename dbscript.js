@@ -83,11 +83,30 @@ async function addPart(partData) {
     return query
 }
 
+async function addSeries(seriesData) {
+  let query = await insert('INSERT INTO Series (Series, Description, Product_group, Power_type) VALUES (?, ?, ?, ?)',
+  [seriesData.series_No, seriesData.description, seriesData.product_Group, seriesData.power_Type])
+  return query
+}
+
 async function editDesc(descData) {
     let query = await select('UPDATE Descriptions SET xQM_No = ?,series_No = ?,Models = ?,Symptoms = ?,Description_of_failure = ?,Technician = ?,Closed = ?,Date_raised = ?,image_location = ?,Fault_type = ? WHERE id = ?',
     [descData.xQM_No,descData.series_No,descData.models,descData.symptoms,descData.failure_Desc,descData.technician,descData.closed,descData.date_Raised,descData.img_Loc,descData.fault_Type, descData.id])
     return query
 }
+
+async function editPart(partData) {
+  let query = await select('UPDATE Parts SET xQM_No = ?,Warranty_No = ?,Serial_No = ?,Date_of_sale = ?,date_of_failure = ?,Part_number = ?,Comments = ?,Sent_to_manufacture = ?,Date_added = ? WHERE id = ?',
+  [partData.xQM_No, partData.warranty_No, partData.serial_No, partData.date_of_sale, partData.date_of_failure, partData.part_No, partData.comments, partData.sent_to_manufacture, partData.date_raised, partData.id])
+  return query
+}
+
+async function editSeries(seriesData) {
+  let query = await select('UPDATE Series Set Series = ?, Description = ?, Product_group = ?, Power_type = ? WHERE id = ?', 
+  [seriesData.series_No, seriesData.description, seriesData.product_Group, seriesData.power_Type, seriesData.id])
+  return query
+}
+
 
 async function getUser(userName, userPass) {
     const query = await select('SELECT * FROM Users WHERE email = ? AND pass = ?', [userName, userPass])
@@ -109,5 +128,8 @@ module.exports = {
     getSeries: getSeries,
     addDesc: addDesc,
     addPart: addPart,
-    editDesc: editDesc
+    addSeries: addSeries,
+    editDesc: editDesc,
+    editPart: editPart,
+    editSeries: editSeries
 }

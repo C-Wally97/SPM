@@ -30,8 +30,10 @@ app.get("/parts", renderParts)
 app.get("/getDesc", getDesc)
 app.post("/addDesc", addDesc)
 app.post("/addPart", addPart)
-// app.post("/editDesc",editDesc)
-app.post("/editDesc/:id",editDesc)
+app.post("/addSeries", addSeries)
+app.post("/editDesc/:id", editDesc)
+app.post("/editPart/:id", editPart)
+app.post("/editSeries/:id", editSeries)
 
 async function getParts(req, res) {
     if (session.auth) {
@@ -63,14 +65,44 @@ async function getSeries(req, res) {
     }
 }
 
-async function addDesc(req, res) {
-    console.log(req.body.closed)
-    if(req.body.closed == "Open") {
-        req.body.closed = true
+async function addSeries(req, res) {
+    if (session.auth) {
+        let response = await sqlDb.addSeries(req.body)
+        if(response != null) {
+            res.redirect('/series')
+        }     
+        else {
+            res.render('series', {data: {message: 'Adding failed'}})
+        }
+        
     }
     else {
-        req.body.closed = false
+         res.redirect('/')
     }
+}
+
+
+async function editSeries(req, res) {
+    req.body.id = req.params.id;
+    console.log(req.body)
+    if (session.auth) {
+        let response = await sqlDb.editSeries(req.body)
+        console.log(response)
+        if(response != null) {
+            res.redirect('/series')
+        }     
+        else {     
+            res.render('series', {data: {message: 'Adding failed'}})
+        }
+        
+    }
+    else {
+         res.redirect('/')
+    }
+}
+
+async function addDesc(req, res) {
+    req.body.closed = (req.body.closed == 'true')
     if (session.auth) {
         let response = await sqlDb.addDesc(req.body)
         if(response != null) {
@@ -110,20 +142,32 @@ async function addPart(req, res) {
 
 async function editDesc(req, res) {
     req.body.id = req.params.id;
-    if(req.body.closed == "Open") {
-        req.body.closed = true
-    }
-    else {
-        req.body.closed = false
-    }
+    req.body.closed = (req.body.closed == 'true')
     if (session.auth) {
         let response = await sqlDb.editDesc(req.body)
-        console.log(response); 
         if(response != null) {
             res.redirect('/descriptions')
         }     
         else {     
             res.render('descriptions', {data: {message: 'Adding failed'}})
+        }
+        
+    }
+    else {
+         res.redirect('/')
+    }
+}
+
+async function editPart(req, res) {
+    req.body.id = req.params.id;
+    req.body.sent_to_manufacture = (req.body.sent_to_manufacture == 'true')
+    if (session.auth) {
+        let response = await sqlDb.editPart(req.body)
+        if(response != null) {
+            res.redirect('/parts')
+        }     
+        else {     
+            res.render('parts', {data: {message: 'Adding failed'}})
         }
         
     }
@@ -148,7 +192,6 @@ async function login(req, res) {
         console.log("failed auth attempt")
         res.render('index', {data: {message: 'invalid login'}})
     }
-
 }
 
 async function renderParts(req, res) {

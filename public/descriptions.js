@@ -49,23 +49,43 @@ window.onload = function() {
         let options = {}
         options.format = 'yyyy-mm-dd'
         let instances = M.Datepicker.init(elems,options);
+        let modal = document.querySelectorAll('.modal');
+        let modalInit = M.Modal.init(modal);
+        let select = document.querySelectorAll('select');
+        let selectInit = M.FormSelect.init(select);
+        document.getElementById('addButton').addEventListener('click', function() {
+          let form = document.getElementById("descForm")
+          let dateBox = document.getElementById("date_Raised")
+          let descButton = document.getElementById("descButton")  
+          form.setAttribute("action", "/addDesc")
+          descButton.textContent = "Add Description"          
+          clearModal()
+          dateBox.value = getToday()
+        });
       });
+      
+      function getToday() {
+        let today = new Date()
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        return yyyy + "-" + mm + "-" + dd; 
+      } 
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.modal');
-        var instances = M.Modal.init(elems);
-      });
+function clearModal() {
+  let data = document.getElementById('descForm')
+  let innerData = data.querySelectorAll('input, textarea')
+  innerData.forEach(el => {
+    el.value = ""
+  })
+}
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems);
-      });
-    
+
 
 function editDesc(descData) {
-  console.log(descData.children[0].textContent);
-  let descButton = document.getElementById("descButton")
+  console.log(descData)
   let form = document.getElementById("descForm")
+  let descButton = document.getElementById('descButton')  
   form.setAttribute("action", `/editDesc/${allData[descData.id].id}`)
   descButton.textContent = "Edit Description"
   document.getElementById("xQM_No").value = allData[descData.id].xQM_No
@@ -83,5 +103,6 @@ function editDesc(descData) {
   document.getElementById("date_Raised").value = allData[descData.id].Date_raised
   document.getElementById("img_Loc").value = allData[descData.id].image_location
   document.getElementById("fault_Type").value = allData[descData.id].Fault_type
-
 }
+
+

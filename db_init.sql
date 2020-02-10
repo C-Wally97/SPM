@@ -12,14 +12,15 @@ INSERT INTO Power_types VALUES("Generic");
 INSERT INTO Power_types VALUES("Battery");
 
 create table Series (
-  Series int(6) primary key,
+  id int(10) auto_increment primary key,
+  Series int(6),
   Description varchar(20),
   Product_group varchar(20),
   Power_type varchar(10),
   foreign key(Power_type) references Power_types(Power_type)
 );
 
-INSERT INTO Series VALUES(1000, "AK 30", "Battery and Charger", "Battery");
+INSERT INTO Series VALUES(1, 1000, "AK 30", "Battery and Charger", "Battery");
 
 
 create table Descriptions (
@@ -33,8 +34,7 @@ create table Descriptions (
   Closed boolean,
   Date_raised varchar(30),
   image_location varchar(200),
-  Fault_type varchar(50),
-  foreign key (Series_No) references Series(Series)
+  Fault_type varchar(50)
 );
 
 INSERT INTO Descriptions VALUES(1,404211, 1000, "AK 30", "Chips on outer casing", "Battery does not charge", "CW", FALSE, "2018-07-18", "img/IMG_0420.jpeg","Premature wear");
@@ -42,7 +42,7 @@ INSERT INTO Descriptions VALUES(2,404211, 1000, "AK 30", "Chips on outer casing"
 
 create table Parts (
   id int(10) auto_increment primary key,
-  xQM_No int(20),
+  xQM_No varchar(20),
   Warranty_No varchar(20),
   Serial_No varchar(20),
   Date_of_sale varchar(20),

@@ -1,6 +1,5 @@
 * {
     font-family: 'Open Sans', sans-serif, FontAwesome;
-    transition: 1s ease;
 }
 
 body {
@@ -14,6 +13,12 @@ body {
 }
 
 #desc_table {
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+}
+
+#series_table {
     text-align: center;
     width: 70%;
     margin: 0 auto;
@@ -36,14 +41,9 @@ table.highlight>tbody>tr:hover {
     background-color: #324851;
 }
 
-#addDesc_Wrapper {
+#modal_Wrapper {
     display: block;
     margin: 0 auto;
-    width: 90%;
-    padding-bottom: 2em;
-}
-
-
-.show {
-    display: block;
+    width: 80%;
+    padding: 2em;
 }

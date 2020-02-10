@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <script src="descriptions.js"></script>
@@ -23,13 +21,13 @@
       </ul>
     </div>
   </nav>
-<a class="waves-effect waves-light btn modal-trigger" href="#myModal">Add a Description</a>
+<a id="addButton" class="waves-effect waves-light btn modal-trigger" href="#myModal">Add a Description</a>
 <% if (data.message) { %>
   <p class="red-text"><%= data.message %></p>
 <% } %>
 <div id="myModal" class="modal">
-<div id="addDesc_Wrapper">
-  <form class="col s12" action="/addDesc" method="POST" id="descForm">
+<div id="modal_Wrapper">
+  <form class="col s12" action="" method="POST" id="descForm">
     <input type="hidden" name="id" id="descID"></input>
     <div class="row">
       <label for="date_Raised">Date Raised</label>
@@ -62,8 +60,8 @@
     <div class="row">
       <label>Issue State</label>
       <select name="closed" class="select" id="closed">
-        <option value="Open">Open</option>
-        <option value="Closed">Closed</option>
+        <option value=true>Open</option>
+        <option value=false>Closed</option>
       </select>
     </div>
     <div class="row">
