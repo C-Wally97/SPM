@@ -8,88 +8,152 @@
   <link rel="stylesheet" href="main.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>Document</title>
+  <title>Descriptions</title>
 </head>
 <body>
   <nav id="nav_main">
-    <div class="nav-wrapper">
-      <a href="#!" class="brand-logo left">SPM</a>
+    <a href="#!" class="brand-logo left">SPM</a>
+    <div class="brand-logo center"><a id="addButton" class="waves-effect waves-light btn modal-trigger" href="#myModal">Add a Description</a></div>
       <ul class="right hide-on-med-and-down">
         <li class="active"><a href="">Descriptions</a></li>
         <li><a href="/parts">Parts</a></li>
         <li><a href="/series">Series</a></li>
       </ul>
-    </div>
   </nav>
-<a id="addButton" class="waves-effect waves-light btn modal-trigger" href="#myModal">Add a Description</a>
-<% if (data.message) { %>
-  <p class="red-text"><%= data.message %></p>
-<% } %>
-<div id="myModal" class="modal">
-<div id="modal_Wrapper">
-  <form class="col s12" action="" method="POST" id="descForm">
-    <input type="hidden" name="id" id="descID"></input>
-    <div class="row">
-      <label for="date_Raised">Date Raised</label>
-      <input name="date_Raised" id="date_Raised" type="text" class="datepicker">
-    </div>
-    <div class="row">
-      <label for="xQM_No">xQM No</label>
-      <input name="xQM_No" id="xQM_No" type="number" class="validate">
-    </div>
-    <div class="row">
-      <label for="Series_No">Series No</label>
-      <input name="series_No" id="series_No" type="number" class="validate">
-    </div>
-    <div class="row">
-      <label for="models">Models</label>
-      <input name="models" id="models" type="text" class="validate">
-    </div>
-    <div class="row">
-      <label for="symptoms">Symptoms</label>
-      <textarea name="symptoms" id="symptoms" class="materialize-textarea"></textarea>
-    </div>
-    <div class="row">
-      <label for="failure_Desc">Description of Failure</label>
-      <textarea name="failure_Desc" id="failure_Desc" class="materialize-textarea"></textarea>
-    </div>
-    <div class="row">
-      <label for="technician">Assigned to</label>
-      <input name="technician" id="technician" type="text" class="validate">
-    </div>
-    <div class="row">
-      <label>Issue State</label>
-      <select name="closed" class="select" id="closed">
-        <option value=true>Open</option>
-        <option value=false>Closed</option>
-      </select>
-    </div>
-    <div class="row">
-      <label for="fault_Type">Fault Type</label>
-      <input name="fault_Type" id="fault_Type" type="text" class="validate">
-    </div>
-    <div class="file-field input-field">
-      <div class="btn">
-        <span>File</span>
-        <input type="file">
-      </div>
-      <div class="file-path-wrapper">
-        <label for="img_Loc">Image Location</label>
-        <input name="img_Loc" id="img_Loc" class="file-path validate" type="text">
+  <body id="sideNav-wrapper">
+    <!-- left navigation panel -->
+  <div id="card-wrapper" class="row">
+    <div class="col s12 m12">
+      <div class="card darken-1">
+        <div class="card-title center-align black-text">Filters</div>
+        <div class="card-content black-text" id="filter-content">
+          <div class="row">
+          <label for="xQM_filter">xQM No</label>
+          <input name="xQM_No" id="xQM_filter" type="text" class="validate">
+          </div>
+          <div class="row">
+          <label for="date_filter">Date Raised</label>
+          <input name="Date_raised" id="date_filter" type="text" class="datepicker">
+        </div>
+          <div class="row">
+          <label for="Series_filter">Series No</label>
+          <input name="Series_No" id="series_filter" type="text" class="validate">
+        </div>
+          <div class="row">
+          <label for="models_filter">Models</label>
+          <input name="Models" id="models_filter" type="text" class="validate">
+        </div>
+          <div class="row">
+          <label for="symptoms_filter">Symptoms</label>
+          <textarea name="Symptoms" id="symptoms_filter" class="materialize-textarea"></textarea>
+        </div>
+          <div class="row">
+          <label for="failure_filter">Description of Failure</label>
+          <textarea name="Description_of_failure" id="failure_filter" class="materialize-textarea"></textarea>
+        </div>
+          <div class="row">
+          <label for="technician_filter">Assigned to</label>
+          <input name="Technician" id="technician_filter" type="text" class="validate">
+        </div>
+          <div class="row">
+          <label>Issue State</label>
+          <select name="Closed" class="select" id="closed_filter">
+            <option value="">N/A</option>
+            <option value=false>Open</option>
+            <option value=true>Closed</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="fault_filter">Fault Type</label>
+          <input name="Fault_type" id="fault_filter" type="text" class="validate">
+        </div>
+        </div>
+        <div class="card-action">
+          <button class="waves-effect btn" id="filterButton">Filter</button>
+        </div>
       </div>
     </div>
-    <button class="waves-effect waves-light btn" id="descButton" type="submit">Add Description</button>
-  </form>
-</div>
-</div>
-  <table id="desc_table" class="highlight" class="container">
+  </div>
+ </body>
+  <main>
+  <div id="main-wrapper">
+    <!-- right page content  -->
+    <% if (data.message) { %>
+      <p class="red-text"><%= data.message %></p>
+    <% } %>
+    <div id="myModal" class="modal">
+    <div id="modal_Wrapper">
+      <form class="col s12" action="" method="POST" id="descForm">
+        <input type="hidden" name="id" id="descID"></input>
+        <div class="row">
+          <label for="date_Raised">Date Raised</label>
+          <input name="date_Raised" id="date_Raised" type="text" class="datepicker">
+        </div>
+        <div class="row">
+          <label for="xQM_No">xQM No</label>
+          <input name="xQM_No" id="xQM_No" type="number" class="validate">
+        </div>
+        <div class="row">
+          <label for="Series_No">Series No</label>
+          <input name="series_No" id="series_No" type="number" class="validate">
+        </div>
+        <div class="row">
+          <label for="models">Models</label>
+          <select name="models" class="select" id="models_wrapper">
+          </select>
+        </div>
+        <div class="row">
+          <label for="symptoms">Symptoms</label>
+          <textarea name="symptoms" id="symptoms" class="materialize-textarea"></textarea>
+        </div>
+        <div class="row">
+          <label for="failure_Desc">Description of Failure</label>
+          <textarea name="failure_Desc" id="failure_Desc" class="materialize-textarea"></textarea>
+        </div>
+        <div class="row">
+          <label for="technician">Assigned to</label>
+          <input name="technician" id="technician" type="text" class="validate">
+        </div>
+        <div class="row">
+          <label>Issue State</label>
+          <select name="closed" class="select" id="closed">
+            <option value=true>Open</option>
+            <option value=false>Closed</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="fault_Type">Fault Type</label>
+          <input name="fault_Type" id="fault_Type" type="text" class="validate">
+        </div>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input type="file">
+          </div>
+          <div class="file-path-wrapper">
+            <label for="img_Loc">Image Location</label>
+            <input name="img_Loc" id="img_Loc" class="file-path validate" type="text">
+          </div>
+        </div>
+        <button class="waves-effect waves-light btn" id="descButton" type="submit">Add Description</button>
+      </form>
+    </div>
+    </div>
+      <table id="content_table" class="highlight" class="container">
+        <tbody id="desc_body">
+        </tbody>
+        </table>
+  </div>
+  <template>
+  <table id="parts_Table">
     <tbody>
-      <tr><th>id</th><th>xQM_No</th><th>Series_No</th><th>Models</th><th>Symptoms</th><th>Description of Failure</th><th>Technician</th><th>Closed</th><th>Date Raised</th><th>Img Location</th><th>Fault Type</th><th></th></tr>
+      <tr><th>id</th><th>xQM_No</th><th>Warranty_No</th><th>Serial_No</th><th>Date of Sale</th><th>Date of Failure</th><th>Part No</th><th>Comments</th><th>Sent_to_manufacture</th><th>Date Added</th><th></th></tr>
     </tbody>
     </table>
+  </template>
+</main>
 
 
-</body>
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 

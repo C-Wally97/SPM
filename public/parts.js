@@ -11,30 +11,7 @@ fetch('./getParts')
 
       // Examine the text in the response
       response.json().then(function(data) {
-        allData = data;
-        let tableID = document.querySelector("#parts_table > tbody");
-        for (let i = 0; i < data.length; i++) {
-            const tr = document.createElement("tr")
-            tr.id = i
-            let tableStr = ""
-            tableStr = tableStr + "<td>" + data[i].id + "</td>"
-            tableStr = tableStr + "<td>" + data[i].xQM_No + "</td>"
-            tableStr = tableStr + "<td>" + data[i].Warranty_No + "</td>"
-            tableStr = tableStr + "<td>" + data[i].Serial_No + "</td>"
-            tableStr = tableStr + "<td>" + data[i].Date_of_sale + "</td>"
-            tableStr = tableStr + "<td>" + data[i].Date_of_failure + "</td>"
-            tableStr = tableStr + "<td>" + data[i].Part_number + "</td>"
-            tableStr = tableStr + "<td>" + data[i].Comments + "</td>"
-            tableStr = tableStr + "<td>" + data[i].Sent_to_manufacture + "</td>"
-            tableStr = tableStr + "<td>" + data[i].Date_added + "</td>"
-            tableStr = tableStr + '<a class="waves-effect waves-light btn modal-trigger" href="#myModal" id="editPart">Edit</a>'
-            tr.innerHTML = tableStr
-            tableID.append(tr)
-            }
-            document.querySelectorAll('#editPart')
-            .forEach(i => i.addEventListener("click", function() {
-              editPart(this.parentElement)
-            }));
+        populateTable(data);
         });
     }
   )
@@ -43,6 +20,7 @@ fetch('./getParts')
   });
 }
 document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById("filterButton").addEventListener('click', filterParts);
   let elems = document.querySelectorAll('.datepicker');
   let options = {}
   options.format = 'yyyy-mm-dd'
@@ -70,6 +48,37 @@ function clearModal() {
   })
 }
 
+function populateTable(data) {
+  allData = data;
+  let tableID = document.querySelector("#content_table > tbody");
+  tableID.innerHTML = ""
+  let tableStr = "<tr><th>id</th><th>xQM_No</th><th>Warranty_No</th><th>Serial_No</th><th>Date of Sale</th><th>Date of Failure</th><th>Part No</th><th>Comments</th><th>Sent_to_manufacture</th><th>Date Added</th><th></th></tr>"
+  tableID.innerHTML = tableStr
+  for (let i = 0; i < data.length; i++) {
+      const tr = document.createElement("tr")
+      tr.id = i
+      let tableStr = ""
+      tableStr = tableStr + "<td>" + data[i].id + "</td>"
+      tableStr = tableStr + "<td>" + data[i].xQM_No + "</td>"
+      tableStr = tableStr + "<td>" + data[i].Warranty_No + "</td>"
+      tableStr = tableStr + "<td>" + data[i].Serial_No + "</td>"
+      tableStr = tableStr + "<td>" + data[i].Date_of_sale + "</td>"
+      tableStr = tableStr + "<td>" + data[i].Date_of_failure + "</td>"
+      tableStr = tableStr + "<td>" + data[i].Part_number + "</td>"
+      tableStr = tableStr + "<td>" + data[i].Comments + "</td>"
+      tableStr = tableStr + "<td>" + data[i].Sent_to_manufacture + "</td>"
+      tableStr = tableStr + "<td>" + data[i].Date_added + "</td>"
+      tableStr = tableStr + '<td><a class="waves-effect waves-light btn modal-trigger" href="#myModal" id="editPart">Edit</a></td>'
+      tr.innerHTML = tableStr
+      tableID.append(tr)
+      }
+      document.querySelectorAll('#editPart')
+      .forEach(i => i.addEventListener("click", function() {
+        editPart(this.parentElement.parentElement)
+      }));
+}
+
+
 function getToday() {
   let today = new Date()
   let dd = String(today.getDate()).padStart(2, '0');
@@ -92,4 +101,36 @@ function editPart(partData) {
   document.getElementById("Comments").value = allData[partData.id].Comments
   document.getElementById("Sent_to_Manufacture").value = allData[partData.id].Sent_to_manufacture
   document.getElementById("date_raised").value = allData[partData.id].Date_added
+}
+
+function filterParts() {
+  let data = document.getElementById('filter-content')
+  let innerData = data.querySelectorAll('input, textarea, select')
+  let querystr = "/filterParts?"
+  let queryBool = false
+  innerData.forEach(el => {
+    if (el.value != "" & el.name != "") {
+      if (queryBool) {
+        querystr = querystr + "&"
+      }
+      querystr = querystr + el.name + "=" + el.value
+      queryBool = true 
+    }
+  })
+  if (querystr == "/filterParts?") {
+    querystr = "./getParts"
+  }
+  
+  fetch(querystr)
+    .then(function(response) {
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' +
+          response.status);
+        return;
+      }
+      // Examine the text in the response
+      response.json().then(function(data) {
+        populateTable(data)
+        });
+    })
 }

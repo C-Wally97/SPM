@@ -22,6 +22,9 @@ app.use(bodyParse.urlencoded({ extended: false }))
 
 app.post("/descriptions", login)
 app.get("/descriptions", renderDesc)
+app.get("/filterDesc", filterDesc)
+app.get("/filterParts", filterParts)
+app.get("/filterSeries", filterSeries),
 app.get("/", renderIndex)
 app.get("/getParts", getParts)
 app.get("/getSeries", getSeries)
@@ -38,6 +41,16 @@ app.post("/editSeries/:id", editSeries)
 async function getParts(req, res) {
     if (session.auth) {
         let response = await sqlDb.getParts()
+        res.json(response)
+    }
+    else {
+        res.redirect('/')
+    }
+}
+
+async function filterParts(req, res) {
+    if (session.auth) {
+        let response = await sqlDb.filterParts(req.query)
         res.json(response)
     }
     else {
@@ -116,6 +129,16 @@ async function addDesc(req, res) {
     else {
          res.redirect('/')
     }
+}
+
+async function filterDesc(req, res) {
+    let response = await sqlDb.filterDesc(req.query)
+    res.json(response);
+}
+
+async function filterSeries(req, res) {
+    let response = await sqlDb.filterSeries(req.query);
+    res.json(response);
 }
 
 async function addPart(req, res) {

@@ -61,6 +61,25 @@ async function getParts() {
     }
 }
 
+async function filterParts(query) {
+  let querystr = "SELECT * FROM Parts WHERE "
+  let queryBool = false
+  for (let el in query) {
+          if (queryBool) {
+              querystr = querystr + " AND "
+          }
+          if (el == "Closed") {
+            console.log(query[el])
+            querystr = querystr + el + '=' + query[el]
+          } else {
+            querystr = querystr + el + `="${query[el]}"`
+          }
+          queryBool = true
+  }
+  let response = await select(querystr)
+  return response
+}
+
 async function getDesc() {
         let query = await select('SELECT * FROM Descriptions')
         return query
@@ -70,11 +89,49 @@ async function getSeries() {
     let query = await select('SELECT * FROM Series')
     return query
 }
- 
+
+async function filterSeries(query) {
+  let querystr = "SELECT * FROM Series WHERE "
+  let queryBool = false
+  for (let el in query) {
+          if (queryBool) {
+              querystr = querystr + " AND "
+          }
+          if (el == "Closed") {
+            querystr = querystr + el + '=' + query[el]
+          } else {
+            querystr = querystr + el + `="${query[el]}"`
+          }
+          queryBool = true
+  }
+  let response = await select(querystr)
+  return response
+}
+
+
 async function addDesc(descData) {
     let query = await insert('INSERT INTO Descriptions (xQM_No,series_No,Models,Symptoms,Description_of_failure,Technician,Closed,Date_raised,image_location,Fault_type) VALUES (?,?,?,?,?,?,?,?,?,?)',
     [descData.xQM_No,descData.series_No,descData.models,descData.symptoms,descData.failure_Desc,descData.technician,descData.closed,descData.date_Raised,descData.img_Loc,descData.fault_Type])
     return query
+}
+
+async function filterDesc(query) {
+  let querystr = "SELECT * FROM Descriptions WHERE "
+  let queryBool = false
+  for (let el in query) {
+          if (queryBool) {
+              querystr = querystr + " AND "
+          }
+          if (el == "Closed") {
+            console.log(query[el])
+            querystr = querystr + el + '=' + query[el]
+          } else {
+            querystr = querystr + el + `="${query[el]}"`
+          }
+          queryBool = true
+  }
+  let response = await select(querystr)
+  return response
 }
 
 async function addPart(partData) {
@@ -120,15 +177,19 @@ async function getUser(userName, userPass) {
 
 
 
+
 module.exports = {
     mysqlConnection: mysqlConnection,
     getParts: getParts,
+    filterParts: filterParts,
     getUser: getUser,
     getDesc: getDesc,
+    filterDesc: filterDesc,
     getSeries: getSeries,
     addDesc: addDesc,
     addPart: addPart,
     addSeries: addSeries,
+    filterSeries: filterSeries,
     editDesc: editDesc,
     editPart: editPart,
     editSeries: editSeries

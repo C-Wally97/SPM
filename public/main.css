@@ -1,27 +1,44 @@
+@font-face {
+    font-family: "myfont";
+    src: url("./fonts/STIHLContrafaceTextDemi.woff") format('woff'),
+         url("./fonts/STIHLContrafaceTextDemi.woff2") format('woff2');
+}
+
 * {
-    font-family: 'Open Sans', sans-serif, FontAwesome;
+    font-family: 'myfont';
 }
 
 body {
-    background-color: #D5D6D2;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 4em auto;
+    grid-template-areas: 
+      "header header "
+      "sidebar main";
+  }
+
+main {
+    grid-area: main;
+    overflow-y: scroll;
+    background-color: #DADADA;
+    padding: 0 3em;
 }
 
-#parts_table {
+
+
+#content_table {
     text-align: center;
-    width: 70%;
-    margin: 0 auto;
 }
 
-#desc_table {
-    text-align: center;
-    width: 70%;
-    margin: 0 auto;
+#sideNav-wrapper {
+    background-color: #DADADA;
+    grid-area: sidebar;
+    overflow: scroll;
 }
 
-#series_table {
-    text-align: center;
-    width: 70%;
-    margin: 0 auto;
+#card-wrapper {
+    overflow: scroll;
 }
 
 table.highlight>tbody>tr:hover {
@@ -38,7 +55,15 @@ table.highlight>tbody>tr:hover {
 }
 
 #nav_main {
-    background-color: #324851;
+    background-color: #F37A1F;
+    grid-area: header;
+    display: block;
+    height: 4em;
+}
+
+#parts_Table {
+    display: table;
+    position: relative;
 }
 
 #modal_Wrapper {
