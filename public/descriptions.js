@@ -108,6 +108,7 @@ function getParts(ele) {
     let temp = document.getElementsByTagName("template")[0];
     let clon = temp.content.cloneNode(true);
     const pTable = clon.childNodes[1] 
+    console.log(allData[ele.id].id + 1)
     ele.parentElement.insertRow(allData[ele.id].id + 1)
     const eleTd = document.createElement("td")
     eleTd.innerHTML = "<h5>Parts:</h5>"
@@ -164,7 +165,8 @@ function editDesc(descData) {
   descButton.textContent = "Edit Description"
   document.getElementById("xQM_No").value = allData[descData.id].xQM_No
   document.getElementById("series_No").value = allData[descData.id].Series_No
-  document.getElementById("models").value = allData[descData.id].Models
+  // document.getElementById("models").value = allData[descData.id].Models
+  checkSeries()
   document.getElementById("symptoms").value = allData[descData.id].Symptoms
   document.getElementById("failure_Desc").value = allData[descData.id].Description_of_failure
   document.getElementById("technician").value = allData[descData.id].Technician

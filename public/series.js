@@ -22,6 +22,8 @@ window.onload = function() {
       document.getElementById("filterButton").addEventListener('click', filterSeries);
       let modal = document.querySelectorAll('.modal');
       let modalInit = M.Modal.init(modal);
+      let select = document.querySelectorAll('.select');
+      let selectInit = M.FormSelect.init(select);
       document.getElementById('addSeries').addEventListener('click', function() {
         let form = document.getElementById("seriesForm");
         let partButton = document.getElementById("seriesButton");
