@@ -97,10 +97,8 @@ async function addSeries(req, res) {
 
 async function editSeries(req, res) {
     req.body.id = req.params.id;
-    console.log(req.body)
     if (session.auth) {
         let response = await sqlDb.editSeries(req.body)
-        console.log(response)
         if(response != null) {
             res.redirect('/series')
         }     
