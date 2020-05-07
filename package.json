@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha",
-    "start": "npx nodemon",
+    "start": "node server.js",
     "initsql": "mysql -u root -p < db_init.sql",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
   },
@@ -21,8 +21,6 @@
   "homepage": "https://github.com/C-Wally97/SPM#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
@@ -30,8 +28,6 @@
     "mysql2": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "^6.7.1",
-    "mocha": "^6.2.2",
-    "nodemon": "^2.0.1"
+    "eslint": "^6.7.1"
   }
 }

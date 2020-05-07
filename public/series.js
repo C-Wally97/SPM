@@ -20,10 +20,12 @@ window.onload = function() {
 
     document.addEventListener('DOMContentLoaded', function() {
       document.getElementById("filterButton").addEventListener('click', filterSeries);
+      // MATERIALIZE INITIALISATIONS 
       let modal = document.querySelectorAll('.modal');
       let modalInit = M.Modal.init(modal);
       let select = document.querySelectorAll('.select');
       let selectInit = M.FormSelect.init(select);
+      // END OF MATERIALIZE INITIALISATIONS 
       document.getElementById('addSeries').addEventListener('click', function() {
         let form = document.getElementById("seriesForm");
         let partButton = document.getElementById("seriesButton");
@@ -40,7 +42,7 @@ window.onload = function() {
         el.value = "";
       })
     }
-
+    // seriesData is data of the element that edit button was clicked for
     function editSeries(seriesData) {
       let form = document.getElementById("seriesForm");
       let editButton = document.getElementById("seriesButton");
@@ -51,7 +53,7 @@ window.onload = function() {
       document.getElementById("product_Group").value = allData[seriesData.id].Product_group;
       document.getElementById("power_Type").value = allData[seriesData.id].Power_type;
     }
-
+    // data variable is database json data
     function populateTable(data) {
       allData = data;
       let tableID = document.querySelector("#content_table > tbody");
@@ -80,6 +82,7 @@ window.onload = function() {
       let innerData = data.querySelectorAll('input, textarea, select');
       let querystr = "/filterSeries?";
       let queryBool = false;
+      // appends filter data to api call if the filter data on element is not empty
       innerData.forEach(el => {
         if (el.value != "" & el.name != "") {
           if (queryBool) {

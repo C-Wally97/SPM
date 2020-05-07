@@ -4,7 +4,7 @@ use SPM_DB;
 
 create table Series (
   id int(10) auto_increment primary key,
-  Series int(6),
+  Series int(4),
   Description varchar(20),
   Product_group varchar(20),
   Power_type varchar(10)

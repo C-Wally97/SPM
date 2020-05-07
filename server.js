@@ -85,9 +85,8 @@ async function addSeries(req, res) {
             res.redirect('/series')
         }     
         else {
-            res.render('series', {data: {message: 'Adding failed'}})
+            res.render('series', {data: {message: 'Adding Failed'}})
         }
-        
     }
     else {
          res.redirect('/')
@@ -97,15 +96,10 @@ async function addSeries(req, res) {
 
 async function editSeries(req, res) {
     req.body.id = req.params.id;
+    console.log(req.body)
     if (session.auth) {
-        let response = await sqlDb.editSeries(req.body)
-        if(response != null) {
-            res.redirect('/series')
-        }     
-        else {     
-            res.render('series', {data: {message: 'Adding failed'}})
-        }
-        
+        await sqlDb.editSeries(req.body)
+        res.redirect('/series')
     }
     else {
          res.redirect('/')
@@ -165,14 +159,8 @@ async function editDesc(req, res) {
     req.body.id = req.params.id;
     req.body.closed = (req.body.closed == 'true')
     if (session.auth) {
-        let response = await sqlDb.editDesc(req.body)
-        if(response != null) {
-            res.redirect('/descriptions')
-        }     
-        else {     
-            res.render('descriptions', {data: {message: 'Adding failed'}})
-        }
-        
+        await sqlDb.editDesc(req.body)
+        res.redirect('/descriptions')
     }
     else {
          res.redirect('/')
@@ -183,14 +171,8 @@ async function editPart(req, res) {
     req.body.id = req.params.id;
     req.body.sent_to_manufacture = (req.body.sent_to_manufacture == 'true')
     if (session.auth) {
-        let response = await sqlDb.editPart(req.body)
-        if(response != null) {
-            res.redirect('/parts')
-        }     
-        else {     
-            res.render('parts', {data: {message: 'Adding failed'}})
-        }
-        
+        await sqlDb.editPart(req.body)
+        res.redirect('/parts')
     }
     else {
          res.redirect('/')
