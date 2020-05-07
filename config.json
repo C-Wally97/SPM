@@ -1,0 +1,6 @@
+{
+        "host": "localhost",
+        "user": "your root username here",
+        "password": "your password here",
+        "database": "SPM_DB"
+    }
