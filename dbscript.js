@@ -167,6 +167,7 @@ async function editSeries(seriesData) {
 
 async function getUser(userName, userPass) {
     const query = await select('SELECT * FROM Users WHERE email = ? AND pass = ?', [userName, userPass])
+    console.log("user: " + userName + " pass: " + userPass)
     if (!query.length) {
         return Error('invalid login')
     }
